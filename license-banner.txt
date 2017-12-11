@@ -1,0 +1,4 @@
+/**
+ * @license ngrx-action-debouncer
+ * MIT license
+ */
