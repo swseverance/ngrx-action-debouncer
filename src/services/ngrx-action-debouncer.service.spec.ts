@@ -8,17 +8,18 @@ import {
   Action,
   Store
 } from '@ngrx/store';
-import { Subject } from 'rxjs/Subject';
+import {
+  Subject
+} from 'rxjs/Subject';
 
 import {
   NgrxActionDebouncerService,
   SubjectMap,
-  SUBJECT_MAP,
   SUBJECT_MAP_PROVIDER
 } from './';
 
 let service: NgrxActionDebouncerService;
-let subjectMap: Map<string, Subject<Action>>;
+let subjectMap: Map<string, Subject<any>>;
 let store: Store<any>;
 let spy: jasmine.Spy;
 
@@ -140,7 +141,7 @@ function setupTest () {
   });
 
   service = TestBed.get(NgrxActionDebouncerService);
-  subjectMap = TestBed.get(SUBJECT_MAP);
+  subjectMap = TestBed.get(SubjectMap);
   store = TestBed.get(Store);
   spy = spyOn(store, 'dispatch');
 }

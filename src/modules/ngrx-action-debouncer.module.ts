@@ -1,7 +1,12 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import {
+  NgModule,
+  ModuleWithProviders
+} from '@angular/core';
 
-import { NgrxActionDebouncerService } from '../services/ngrx-action-debouncer.service';
-import { SUBJECT_MAP_PROVIDER } from '../services/subject-map';
+import {
+  NgrxActionDebouncerService,
+  SUBJECT_MAP_PROVIDER
+} from '../services/index';
 
 @NgModule({
   providers: [
