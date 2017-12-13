@@ -1,6 +1,6 @@
 {
     "name": "ngrx-action-debouncer",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Debounce a stream of actions before being dispatched to the store",
     "main": "./bundles/ngrx-action-debouncer.umd.js",
     "module": "./esm5/ngrx-action-debouncer.js",
