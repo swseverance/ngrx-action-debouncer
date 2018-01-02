@@ -1,7 +1,4 @@
-import {
-  NgModule,
-  ModuleWithProviders
-} from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import {
   NgrxActionDebouncerService,
@@ -9,9 +6,6 @@ import {
 } from '../services/index';
 
 @NgModule({
-  providers: [
-    NgrxActionDebouncerService,
-    SUBJECT_MAP_PROVIDER
-  ]
+  providers: [NgrxActionDebouncerService, SUBJECT_MAP_PROVIDER]
 })
-export class NgrxActionDebouncerModule { }
+export class NgrxActionDebouncerModule {}
