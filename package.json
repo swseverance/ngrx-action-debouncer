@@ -1,6 +1,6 @@
 {
     "name": "ngrx-action-debouncer",
-    "version": "0.1.4",
+    "version": "1.0.0",
     "description": "Debounce a stream of actions before being dispatched to the store",
     "main": "./bundles/ngrx-action-debouncer.umd.js",
     "module": "./esm5/ngrx-action-debouncer.js",
@@ -51,7 +51,7 @@
         "@angular/platform-browser": "5.0.0",
         "@angular/platform-browser-dynamic": "5.0.0",
         "@angular/platform-server": "5.0.0",
-        "@compodoc/compodoc": "1.0.3",
+        "@compodoc/compodoc": "1.0.5",
         "@ngrx/store": "^4.1.1",
         "@types/jasmine": "2.6.2",
         "@types/node": "8.0.47",
