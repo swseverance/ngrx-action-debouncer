@@ -5,13 +5,13 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/first';
 
-import { SubjectMap } from './subject-map';
+import { SUBJECT_MAP } from './subject-map';
 
 @Injectable()
 export class NgrxActionDebouncerService {
   constructor(
     @Inject(Store) private store: Store<any>,
-    private subjectMap: SubjectMap
+    @Inject(SUBJECT_MAP) private subjectMap: Map<string, Subject<any>>
   ) {}
 
   public debounceAction<A extends Action>(

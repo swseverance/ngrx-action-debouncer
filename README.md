@@ -1,6 +1,6 @@
 # ngrx-action-debouncer
 [![Build Status](https://travis-ci.org/swseverance/ngrx-action-debouncer.svg?branch=master)](https://travis-ci.org/swseverance/ngrx-action-debouncer)
->Debounce a stream of actions before being dispatched to the store.
+>Debounce a stream of actions before being dispatched to @ngrx/store.
 
 This library is designed to work with **@ngrx/store** apps written with **Angular v5+**.
 

@@ -1,10 +1,11 @@
-import { ValueProvider } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
-export abstract class SubjectMap extends Map<string, Subject<any>> {}
+export const SUBJECT_MAP = new InjectionToken<Map<string, Subject<any>>>(
+  'SubjectMap'
+);
 
-export const SUBJECT_MAP_PROVIDER: ValueProvider = {
-  provide: SubjectMap,
-  useValue: new Map()
+export const subjectMapFactory = function() {
+  return new Map();
 };

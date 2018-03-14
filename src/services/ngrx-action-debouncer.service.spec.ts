@@ -3,14 +3,10 @@ import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Action, Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 
-import {
-  NgrxActionDebouncerService,
-  SubjectMap,
-  SUBJECT_MAP_PROVIDER
-} from './';
+import { NgrxActionDebouncerService, SUBJECT_MAP, subjectMapFactory } from './';
 
 let service: NgrxActionDebouncerService;
-let subjectMap: SubjectMap;
+let subjectMap: Map<string, Subject<any>>;
 let store: Store<any>;
 let spy: jasmine.Spy;
 
@@ -130,7 +126,10 @@ function setupTest() {
   TestBed.configureTestingModule({
     providers: [
       NgrxActionDebouncerService,
-      SUBJECT_MAP_PROVIDER,
+      {
+        provide: SUBJECT_MAP,
+        useFactory: subjectMapFactory
+      },
       {
         provide: Store,
         useValue: {
@@ -141,7 +140,7 @@ function setupTest() {
   });
 
   service = TestBed.get(NgrxActionDebouncerService);
-  subjectMap = TestBed.get(SubjectMap);
+  subjectMap = TestBed.get(SUBJECT_MAP);
   store = TestBed.get(Store);
   spy = spyOn(store, 'dispatch');
 }
