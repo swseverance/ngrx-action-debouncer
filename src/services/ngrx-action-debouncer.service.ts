@@ -1,43 +1,49 @@
 import { Injectable, Inject } from '@angular/core';
 
 import { Action, Store } from '@ngrx/store';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/first';
 
-import { SUBJECT_MAP } from './subject-map';
+import { TIMER_MAP } from './timer-map';
 
 @Injectable()
 export class NgrxActionDebouncerService {
   constructor(
     @Inject(Store) private store: Store<any>,
-    @Inject(SUBJECT_MAP) private subjectMap: Map<string, Subject<any>>
+    @Inject(TIMER_MAP) private timerMap: Map<string, any>
   ) {}
 
-  public debounceAction<A extends Action>(
-    action: A,
-    dueTime: number = 0
-  ): void {
+  debounceAction<A extends Action>(action: A, dueTime: number = 0): void {
     const { type } = action;
 
-    if (!this.subjectMap.has(type)) {
-      const subject = new Subject<A>();
-      const next = (action: A) => this.store.dispatch(action);
-      const complete = () => this.subjectMap.delete(type);
-
-      subject
-        .asObservable()
-        .debounceTime(dueTime)
-        .first()
-        .subscribe({ next, complete });
-
-      this.subjectMap.set(type, subject);
+    if (this.hasExistingTimer(type)) {
+      this.killExistingTimer(type);
     }
 
-    const subject = this.subjectMap.get(type);
+    this.startTimer(action, dueTime);
+  }
 
-    if (subject) {
-      subject.next(action);
-    }
+  private hasExistingTimer(type: string) {
+    return this.timerMap.has(type);
+  }
+
+  private killExistingTimer(type: string) {
+    const timer = this.getTimer(type);
+    window.clearTimeout(timer);
+  }
+
+  private getTimer(type: string) {
+    return this.timerMap.get(type);
+  }
+
+  private startTimer<A extends Action>(action: A, dueTime: number) {
+    const timer = setTimeout(() => {
+      this.store.dispatch(action);
+      this.timerMap.delete(action.type);
+    }, dueTime);
+
+    this.setTimer(action.type, timer);
+  }
+
+  private setTimer(type: string, timer: any) {
+    this.timerMap.set(type, timer);
   }
 }
