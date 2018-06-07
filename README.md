@@ -39,8 +39,6 @@ this.store.dispatch({
   payload: 'ang'
 });
 ```
-`debounceAction()` creates and subscribes to an `Observable` **for each distinct type of action it is invoked with.** The Observable is debounced using the **RxJS** `debounceTime()` operator, with the specified due time. When the Observable finally emits the action is dispatched to the store.
-
 **ngrx-action-debouncer** would view all of the above actions as belonging to the same stream of actions because their type is identical. Using `debounceAction()` with a due time of 75ms would result in only one of the three actions being dispatched to the store:
 ```typescript
 // 0ms
@@ -74,7 +72,7 @@ this.debouncer.debounceAction({
 ```
 ## Multiple Types of Actions
 
-Because each type of action receives its own Observable, `debounceAction()` can safely be used with multiple types of actions. See the library's unit tests for an example of why this works.
+`debounceAction()` can safely be used with multiple types of actions. See the library's unit tests for an example of why this works.
 
 ## Usage
 Import `NgrxActionDebouncerModule` only once, into your app's root module:
