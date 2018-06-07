@@ -2,16 +2,16 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import {
   NgrxActionDebouncerService,
-  SUBJECT_MAP,
-  subjectMapFactory
+  TIMER_MAP,
+  timerMapFactory
 } from '../services/index';
 
 @NgModule({
   providers: [
     NgrxActionDebouncerService,
     {
-      provide: SUBJECT_MAP,
-      useFactory: subjectMapFactory
+      provide: TIMER_MAP,
+      useFactory: timerMapFactory
     }
   ]
 })
