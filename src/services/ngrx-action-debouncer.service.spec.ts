@@ -1,12 +1,11 @@
 import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { Action, Store } from '@ngrx/store';
-import { Subject } from 'rxjs/Subject';
 
-import { NgrxActionDebouncerService, SUBJECT_MAP, subjectMapFactory } from './';
+import { NgrxActionDebouncerService, TIMER_MAP, timerMapFactory } from './';
 
 let service: NgrxActionDebouncerService;
-let subjectMap: Map<string, Subject<any>>;
+let timerMap: Map<string, any>;
 let store: Store<any>;
 let spy: jasmine.Spy;
 
@@ -67,11 +66,11 @@ describe('NgrxActionDebouncerService', () => {
       service.debounceAction(mockAction, 100);
 
       tick(50); // 150ms
-      expect(subjectMap.size).toBe(1);
+      expect(timerMap.size).toBe(1);
 
       tick(50); // 200ms
       expect(spy).toHaveBeenCalledWith(mockAction);
-      expect(subjectMap.size).toBe(0);
+      expect(timerMap.size).toBe(0);
     })
   );
 
@@ -127,8 +126,8 @@ function setupTest() {
     providers: [
       NgrxActionDebouncerService,
       {
-        provide: SUBJECT_MAP,
-        useFactory: subjectMapFactory
+        provide: TIMER_MAP,
+        useFactory: timerMapFactory
       },
       {
         provide: Store,
@@ -140,7 +139,7 @@ function setupTest() {
   });
 
   service = TestBed.get(NgrxActionDebouncerService);
-  subjectMap = TestBed.get(SUBJECT_MAP);
+  timerMap = TestBed.get(TIMER_MAP);
   store = TestBed.get(Store);
   spy = spyOn(store, 'dispatch');
 }
